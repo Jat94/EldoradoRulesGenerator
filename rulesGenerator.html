@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Rules editor</title>
+        <link rel="stylesheet" href="https://static.eldorado.ru/promo/default/css/normalize.css">
+        <link rel="stylesheet" href="https://static.eldorado.ru/static/css/redesign3/css1_core.css">
+        <link rel="stylesheet" href="https://static.eldorado.ru/promo/default/css/fonts.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="texteditor">
+            <div class="texteditor-title">Генератор списка правил</div>
+
+            <div class="texteditor-tab-nav">
+                <div class="texteditor-tab active" data-tab="1">Из Word в HTML</div>
+                <div class="texteditor-tab" data-tab="2">Предпросмотр</div>
+                <div class="texteditor-tab" data-tab="3">Как работает</div>
+            </div>
+
+            <div class="texteditor-tab-content active" data-tab="1">
+                <textarea name="texteditor-input" id="" cols="30" rows="10"></textarea> 
+                <a href="" class="texteditor-btn">Трансформировать в HTML</a>
+            </div>
+
+            <div class="texteditor-tab-content" data-tab="2">
+                <ol class="texteditor-render"></ol>
+            </div>
+
+            <div class="texteditor-tab-content" data-tab="3">
+                <ol class="texteditor-render how-to">
+                    <li>В поле ввода нужно вставлять только список пунктов</li>
+                    <li>Чтобы генератор корректно отработал необходимо вставлять нумерной список с точкой</li>
+                    <li>Таблицы генерируются стандартные (без rowspan и colspan)</li>
+                    <li>В ячейках таблицы не должно быть переносов на новую строку (\n)</li>
+                </ol>
+            </div>
+        </div>
+        
+        
+        <script>
+
+            'use strict';
+
+            const input = document.querySelector('textarea[name="texteditor-input"]');
+            const render = document.querySelector('.texteditor-render');
+            const result = document.querySelector('textarea[name="texteditor-result"]');
+            const button = document.querySelector('.texteditor-btn');
+            let inputValue;
+
+            button.addEventListener('click', e => {
+                e.preventDefault();
+                inputValue = input.value;
+                let textRowArr = splitTextToRows(inputValue),
+                    resultHTML = '';
+                for (let i=0;i<textRowArr.length;i++) {
+                    //console.log(textRowArr[i])
+                    resultHTML = resultHTML + '<li><span>' + splitTextToTable(textRowArr[i]) + '</span></li>\n';
+                }
+                resultHTML = resultHTML.replace('<br> <br>', ''); // убираем лишние br
+                render.innerHTML = resultHTML;
+                input.value = resultHTML;
+            });
+
+
+            // переключаем табы
+            const TabSelector = document.querySelectorAll('.texteditor-tab');
+            const TabContent = document.querySelectorAll('.texteditor-tab-content');
+            TabSelector.forEach(tab=> {
+                tab.addEventListener('click', event => {
+                    const tabId = tab.getAttribute('data-tab');
+                    TabSelector.forEach(e => {
+                        e.classList.remove('active');
+                    });
+                    tab.classList.add('active');   
+                    TabContent.forEach(e => {
+                        e.classList.remove('active');
+                    });
+                    let CurrentTab = document.querySelector(`.texteditor-tab-content[data-tab="${tabId}"]`);
+                    CurrentTab.classList.add('active');
+                });
+            });
+
+            //let numm = indexSymbolCode('Привет мир!', 1080);
+            //console.log(numm);
+
+
+            //console.log("8. STOP ЛИСТ".match(/^\d{1,2}.\s/));
+            //8.\tПривет мир!
+            //18.\tПривет Мир
+
+
+            // разбиваем строки и удаляем всё лишнее
+            function splitTextToRows(text) {
+
+
+                let textRows = text.split('\n'),
+                    cleanTextRows,
+                    checkNumRegexpV1 = /^\d{1,2}.\t/,
+                    checkNumRegexpV2 = /^\d{1,2}.\s[\W\w]/,
+                    checkNumRegexp,
+                    removeNumRegexp,
+                    textRowsResult = [];
+
+                    console.log(textRows)
+
+                console.log('splitTextToRows');
+                cleanTextRows = textRows.filter(i => {
+                    console.log(i)
+                    if (i !== '' && i !== ' ' && i != '\s' && i != '\t' && i !== '	' && !i.match(/^\t/)) {
+                        
+                        return i;
+                        
+                    } else {
+                        //console.log(`error ${i}`);
+                        //console.log(i);
+                        return false;
+                    }
+                });
+                console.log(cleanTextRows)
+
+                if (cleanTextRows[0].match(checkNumRegexpV1)) {
+                    checkNumRegexp = checkNumRegexpV1;
+                    removeNumRegexp = checkNumRegexpV1;
+                    console.log('varian 1');
+                } else {
+                    if (cleanTextRows[0].match(checkNumRegexpV2)) {
+                        checkNumRegexp = checkNumRegexpV2;
+                        removeNumRegexp = /^\d{1,2}.\s/;
+                        console.log('varian 2');
+                    } else {
+                        console.log('varian 3');
+                        return [text];
+                    }
+                }
+
+                for (let i=0; i<cleanTextRows.length; i++) {
+                    console.log(cleanTextRows[i]);
+                    if (cleanTextRows[i] !== '' || cleanTextRows[i] !== ' ' || cleanTextRows[i] !== '\t') {
+                        if ( cleanTextRows[i].match(checkNumRegexp) ) {
+                            textRowsResult.push(cleanTextRows[i].replace(removeNumRegexp, ""));
+                        }
+                        else {
+                            if (textRowsResult[textRowsResult.length -1] !== undefined) {
+                                textRowsResult[textRowsResult.length -1] = textRowsResult[textRowsResult.length -1] + ' <br>' + cleanTextRows[i];
+                            }
+                        }
+                    }
+                }
+                return textRowsResult;
+            }
+
+            function splitTextToTable(text) {
+                let checkTableRegexp = /\t/;
+                let tableString = '';
+                if (text.match(checkTableRegexp)) { // строка подходит под таблицу
+                    let tableArr = [];
+
+                    tableArr = text.split('<br>'); // разбиваем строку по <br>
+
+
+                    console.log(tableArr)
+
+                    for (let i=0;i<tableArr.length;i++) { // перебираем полученный массив
+                        if (tableArr[i].match(checkTableRegexp)) {// если элемент массива подходит под таблицу
+
+                            let rowArr = tableArr[i].split('\t');
+                            let rowString = '';
+
+                            if (tableArr[i - 1] === undefined || !tableArr[i - 1].match(checkTableRegexp)) {  // открываем таблицу
+                                rowString = '\n<table>\n';
+                            }
+
+                            rowString = rowString + '<tr>';
+                            for (let r=0;r<rowArr.length;r++) { // формируем строку таблицы с помощью перебора
+                                rowString = rowString + `<td>${rowArr[r]}</td>`;
+                            }
+                            rowString = rowString + '</tr>\n';
+
+                            if (tableArr[i + 1] === undefined || !tableArr[i + 1].match(checkTableRegexp)) {  // закрываем таблицу
+                                rowString = rowString + '</table>\n';
+                            }
+
+                            tableString = tableString + rowString;
+                            
+
+                        } else {
+                            tableString = tableString + tableArr[i] + '<br>';
+                        }
+                    }
+                } else {
+                    tableString = text;
+                }
+                return tableString;
+            }
+
+        </script>
+    </body>
+</html>
