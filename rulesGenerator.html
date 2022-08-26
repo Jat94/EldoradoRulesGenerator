@@ -7,7 +7,286 @@
         <title>Rules editor</title>
 
         <style>
-             html {line-height: 1.15;-webkit-text-size-adjust: 100%;}body {margin: 0;}main {display: block;}h1 {font-size: 2em;margin: 0.67em 0;}hr {box-sizing: content-box;height: 0;overflow: visible;}pre {font-family: monospace, monospace;font-size: 1em;}a {background-color: transparent;}abbr[title] {border-bottom: none;text-decoration: underline;-webkit-text-decoration: underline dotted;text-decoration: underline dotted;}b, strong {font-weight: bolder;}code, kbd, samp {font-family: monospace, monospace;font-size: 1em;}small {font-size: 80%;}sub, sup {font-size: 75%;line-height: 0;position: relative;vertical-align: baseline;}sub {bottom: -0.25em;}sup {top: -0.5em;}img {border-style: none;}button, input, optgroup, select, textarea {font-family: inherit;font-size: 100%;line-height: 1.15;margin: 0;}button, input {overflow: visible;}button, select {text-transform: none;}button, [type=button], [type=reset], [type=submit] {-webkit-appearance: button;}button::-moz-focus-inner, [type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner {border-style: none;padding: 0;}button:-moz-focusring, [type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring {outline: 1px dotted ButtonText;}fieldset {padding: 0.35em 0.75em 0.625em;}legend {box-sizing: border-box;color: inherit;display: table;max-width: 100%;padding: 0;white-space: normal;}progress {vertical-align: baseline;}textarea {overflow: auto;}[type=checkbox], [type=radio] {box-sizing: border-box;padding: 0;}[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {height: auto;}[type=search] {-webkit-appearance: textfield;outline-offset: -2px;}[type=search]::-webkit-search-decoration {-webkit-appearance: none;}::-webkit-file-upload-button {-webkit-appearance: button;font: inherit;}details {display: block;}summary {display: list-item;}template {display: none;}[hidden] {display: none;}.texteditor {position: relative;min-height: 100vh;height: auto;width: 100%;margin: 0;padding: 0;background-color: #EBEBEB;}.texteditor * {box-sizing: border-box;}.texteditor .texteditor-tab-nav {display: flex;justify-content: center;align-items: center;margin: 0 0 30px;border-radius: 3px;overflow: hidden;}.texteditor .texteditor-tab-nav .texteditor-tab {padding: 10px 20px;font-size: 20px;line-height: 1.3;background: rgba(0, 0, 0, 0.05);color: #262626;cursor: pointer;font-family: "Graphik_LC";font-weight: 500;}.texteditor .texteditor-tab-nav .texteditor-tab:hover {background-color: #D3D3D3;}.texteditor .texteditor-tab-nav .texteditor-tab.active {background-color: #8AC641;color: white;}.texteditor .texteditor-btn {display: inline-block;vertical-align: top;cursor: pointer;border-radius: 3px;background-color: #76BC21;padding: 10px 25px;font-size: 18px;margin: 20px 0 0;color: white;font-weight: 500;line-height: 1.2;box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);}.texteditor .texteditor-btn:hover {background-color: #8AC641;}.texteditor .texteditor-btn:focus {background-color: #569F15;}.texteditor .texteditor-title {font-family: "DINWebNarrow";text-transform: uppercase;font-size: 30px;padding: 50px 0 25px;text-align: center;color: #262626;}.texteditor .texteditor-tab-content {width: 100%;text-align: center;display: none;padding: 0 0 50px;}.texteditor .texteditor-tab-content.active {display: block;}.texteditor textarea {width: calc(100vw - 30px);max-width: 1024px;height: calc(100vh - 250px);max-height: 500px;resize: none;border: none;padding: 15px;font-size: 16px;margin: auto;outline: none;background-color: #FFFFFF;color: #262626;display: block;border-radius: 3px;}.texteditor .texteditor-render {padding: 25px 30px;font-size: 16px;color: #262626;text-align: left;max-width: 1200px;margin: auto;}.texteditor .texteditor-render.how-to {max-width: 800px;}.texteditor .texteditor-render li + li {margin-top: 5px;}.texteditor .texteditor-render td {padding: 3px 6px;border: 1px solid #262626;}.texteditor-render table{border-spacing: 0;border-collapse: collapse;}body {overflow-x: hidden;}
+             html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    margin: 0;
+}
+main {
+    display: block;
+}
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+a {
+    background-color: transparent;
+}
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+}
+b,
+strong {
+    font-weight: bolder;
+}
+code,
+kbd,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+small {
+    font-size: 80%;
+}
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+sub {
+    bottom: -0.25em;
+}
+sup {
+    top: -0.5em;
+}
+img {
+    border-style: none;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+button,
+input {
+    overflow: visible;
+}
+button,
+select {
+    text-transform: none;
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+}
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+}
+fieldset {
+    padding: 0.35em 0.75em 0.625em;
+}
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+}
+progress {
+    vertical-align: baseline;
+}
+textarea {
+    overflow: auto;
+}
+[type="checkbox"],
+[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+[type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+details {
+    display: block;
+}
+summary {
+    display: list-item;
+}
+template {
+    display: none;
+}
+[hidden] {
+    display: none;
+}
+.texteditor {
+    position: relative;
+    min-height: 100vh;
+    height: auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #ebebeb;
+}
+.texteditor * {
+    box-sizing: border-box;
+}
+.texteditor .texteditor-tab-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 30px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.texteditor .texteditor-tab-nav .texteditor-tab {
+    padding: 10px 20px;
+    font-size: 20px;
+    line-height: 1.3;
+    background: rgba(0, 0, 0, 0.05);
+    color: #262626;
+    cursor: pointer;
+    font-family: "Graphik_LC";
+    font-weight: 500;
+}
+.texteditor .texteditor-tab-nav .texteditor-tab:hover {
+    background-color: #d3d3d3;
+}
+.texteditor .texteditor-tab-nav .texteditor-tab.active {
+    background-color: #8ac641;
+    color: white;
+}
+.texteditor .texteditor-btn {
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #76bc21;
+    padding: 10px 25px;
+    font-size: 18px;
+    margin: 20px 0 0;
+    color: white;
+    font-weight: 500;
+    line-height: 1.2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.texteditor .texteditor-btn:hover {
+    background-color: #8ac641;
+}
+.texteditor .texteditor-btn:focus {
+    background-color: #569f15;
+}
+.texteditor .texteditor-title {
+    font-family: "DINWebNarrow";
+    text-transform: uppercase;
+    font-size: 30px;
+    padding: 50px 0 25px;
+    text-align: center;
+    color: #262626;
+}
+.texteditor .texteditor-tab-content {
+    width: 100%;
+    text-align: center;
+    display: none;
+    padding: 0 0 50px;
+}
+.texteditor .texteditor-tab-content.active {
+    display: block;
+}
+.texteditor .texteditor-input {
+    overflow: auto;
+    text-align: left;
+    width: calc(100vw - 30px);
+    max-width: 1024px;
+    height: calc(100vh - 250px);
+    max-height: 500px;
+    resize: none;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    margin: auto;
+    outline: none;
+    background-color: #ffffff;
+    color: #262626;
+    display: block;
+    border-radius: 3px;
+}
+
+.texteditor .texteditor-input * {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    height:  auto !important;
+}
+.texteditor .texteditor-render {
+    padding: 25px 30px;
+    font-size: 16px;
+    color: #262626;
+    text-align: left;
+    max-width: 1200px;
+    margin: auto;
+}
+.texteditor .texteditor-render.how-to {
+    max-width: 800px;
+}
+.texteditor .texteditor-render li + li {
+    margin-top: 5px;
+}
+.texteditor .texteditor-render li.eld-disclaimer {
+    margin-top: 15px;
+    font-size: 70%;
+    list-style: none;
+}
+.texteditor .texteditor-render li.eld-disclaimer + li.eld-disclaimer {
+    margin-top: 5px;
+}
+.texteditor .texteditor-render td {
+    padding: 3px 6px;
+    border: 1px solid #262626;
+}
+.texteditor-render table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+body {
+    overflow-x: hidden;
+}
+
         </style>
         <link rel="stylesheet" href="https://static.eldorado.ru/static/css/redesign3/css1_core.css">
         <link rel="stylesheet" href="https://static.eldorado.ru/promo/default/css/fonts.css">
@@ -23,7 +302,7 @@
             </div>
 
             <div class="texteditor-tab-content active" data-tab="1">
-                <textarea name="texteditor-input" id="" cols="30" rows="10"></textarea> 
+                <div class="texteditor-input"  contenteditable="true"></div>
                 <a href="" class="texteditor-btn">Трансформировать в HTML</a>
             </div>
 
@@ -35,8 +314,6 @@
                 <ol class="texteditor-render how-to">
                     <li>В поле ввода нужно вставлять только список пунктов</li>
                     <li>Чтобы генератор корректно отработал необходимо вставлять нумерной список с точкой</li>
-                    <li>Таблицы генерируются стандартные (без rowspan и colspan)</li>
-                    <li>В ячейках таблицы не должно быть переносов на новую строку (\n)</li>
                 </ol>
             </div>
         </div>
@@ -45,25 +322,110 @@
         <script>
 
             'use strict';
-
-            const input = document.querySelector('textarea[name="texteditor-input"]');
+            const regExpNum = /^\d{1,2}.[ a-zA-Za-яА-ЯёЁ]/;
+            const selector = document.querySelector('.texteditor-input');
             const render = document.querySelector('.texteditor-render');
-            const result = document.querySelector('textarea[name="texteditor-result"]');
             const button = document.querySelector('.texteditor-btn');
             let inputValue;
 
             button.addEventListener('click', e => {
                 e.preventDefault();
-                inputValue = input.value;
-                let textRowArr = splitTextToRows(inputValue),
-                    resultHTML = '';
-                for (let i=0;i<textRowArr.length;i++) {
-                    //console.log(textRowArr[i])
-                    resultHTML = resultHTML + '<li><span>' + splitTextToTable(textRowArr[i]) + '</span></li>\n';
-                }
-                resultHTML = resultHTML.replace('<br> <br>', ''); // убираем лишние br
-                render.innerHTML = resultHTML;
-                input.value = resultHTML;
+                // очищаем верстку от лишних атрибутов
+                let allTags = selector.querySelectorAll('*');
+                allTags.forEach(tag => {
+                    removeAllAttributes(tag);
+                });
+
+                let arrList = [];
+                let arrDisclaimer = [];
+
+                let innerTags = selector.querySelectorAll(':scope > *');
+                innerTags.forEach(tag => {
+
+                    // удаляем пустые элементы
+                    if (tag.innerText === '' || tag.innerText === ' ' || tag.innerText === '&nbsp;' || tag.innerText === '\t') {
+                        tag.remove();
+                        console.log('removed');
+                        return;
+                    }
+
+                    if (tag.nodeName === 'P') {
+                        let paragraphHTML = tag.innerText;
+                        
+                        paragraphHTML = paragraphHTML.trim();
+                        paragraphHTML = paragraphHTML.replace(/(?:\r\n|\r|\n)/g, ' <br>');
+
+                        if (paragraphHTML.match(regExpNum)) {
+                            arrList.push(paragraphHTML);
+                        } else {
+                            if (arrList[arrList.length-1]) {
+                                arrList[arrList.length-1] = arrList[arrList.length-1] + '<br>' + paragraphHTML;
+                            }
+                            else {
+                                arrList[arrList.length-1] = paragraphHTML;
+                            }
+                        }
+
+
+                    }
+
+                    if (tag.nodeName === 'DIV') {
+                        let checkTable = tag.querySelectorAll('table');
+                        if (!checkTable.length) {
+                            let disclaimers = tag.querySelectorAll(`[id^='ftn']`);
+                            console.log('disclaimers: ' + disclaimers);
+                            disclaimers.forEach(disclaimer => {
+                                arrDisclaimer.push(disclaimer.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
+                            });
+                        } else {
+                            checkTable.forEach(table => {
+                                clearTable(table);
+
+                                if (arrList[arrList.length-1]) {
+                                    arrList[arrList.length-1] = arrList[arrList.length-1] + '\n<table>' + table.innerHTML + '</table>';
+                                }
+                                else {
+                                    arrList[arrList.length-1] = '<table>' + table.innerHTML + '</table>';
+                                }
+                            });
+                        }
+                    }
+
+                    if (tag.nodeName === 'TABLE') {
+
+                            clearTable(tag);
+
+                            if (arrList[arrList.length-1]) {
+                                arrList[arrList.length-1] = arrList[arrList.length-1] + '\n<table>' + tag.innerHTML + '</table>';
+                            }
+                            else {
+                                arrList[arrList.length-1] = '<table>' + tag.innerHTML + '</table>';
+                            }
+
+                    }
+
+
+                });
+
+
+                let arrListFinish = arrList.map(i => i.replace(/^\d{1,2}./, '').trimStart());
+                arrListFinish = arrListFinish.map(i => i.replace('<br><br>', '').trimStart());
+                let arrListHTML = [];
+                arrListFinish.forEach(i=> {
+                    arrListHTML.push('<li><span>' + i + '</li></span>');
+                });
+                arrDisclaimer.forEach(i=> {
+                    arrListHTML.push('<li class="eld-disclaimer"><span>' + i + '</li></span>');
+                });
+                let listHTML = '';
+                arrListHTML.forEach(i=>{
+                    listHTML = listHTML + i + '\n';
+                });
+
+
+                render.innerHTML = listHTML;
+                selector.innerText = listHTML;
+
             });
 
 
@@ -85,118 +447,26 @@
                 });
             });
 
-            //let numm = indexSymbolCode('Привет мир!', 1080);
-            //console.log(numm);
 
+            function removeAllAttributes(element) {
+                element.removeAttribute('border');
+                element.removeAttribute('cellspacing');
+                element.removeAttribute('cellpadding');
+                element.removeAttribute('width');
+                element.removeAttribute('style');
+                element.removeAttribute('class');
+                element.removeAttribute('valign');
+                element.removeAttribute('nowrap');
+                element.removeAttribute('align');
+            }
 
-            //console.log("8. STOP ЛИСТ".match(/^\d{1,2}.\s/));
-            //8.\tПривет мир!
-            //18.\tПривет Мир
-
-
-            // разбиваем строки и удаляем всё лишнее
-            function splitTextToRows(text) {
-
-
-                let textRows = text.split('\n'),
-                    cleanTextRows,
-                    checkNumRegexpV1 = /^\d{1,2}.\t/,
-                    checkNumRegexpV2 = /^\d{1,2}.\s[\W\w]/,
-                    checkNumRegexp,
-                    removeNumRegexp,
-                    textRowsResult = [];
-
-                    console.log(textRows)
-
-                console.log('splitTextToRows');
-                cleanTextRows = textRows.filter(i => {
-                    console.log(i)
-                    if (i !== '' && i !== ' ' && i != '\s' && i != '\t' && i !== '	' && !i.match(/^\t/)) {
-                        
-                        return i;
-                        
-                    } else {
-                        //console.log(`error ${i}`);
-                        //console.log(i);
-                        return false;
-                    }
+            function clearTable(table) {
+                let tds = table.querySelectorAll('td');
+                tds.forEach(td => {
+                    td.innerHTML = td.innerText;
                 });
-                console.log(cleanTextRows)
-
-                if (cleanTextRows[0].match(checkNumRegexpV1)) {
-                    checkNumRegexp = checkNumRegexpV1;
-                    removeNumRegexp = checkNumRegexpV1;
-                    console.log('varian 1');
-                } else {
-                    if (cleanTextRows[0].match(checkNumRegexpV2)) {
-                        checkNumRegexp = checkNumRegexpV2;
-                        removeNumRegexp = /^\d{1,2}.\s/;
-                        console.log('varian 2');
-                    } else {
-                        console.log('varian 3');
-                        return [text];
-                    }
-                }
-
-                for (let i=0; i<cleanTextRows.length; i++) {
-                    console.log(cleanTextRows[i]);
-                    if (cleanTextRows[i] !== '' || cleanTextRows[i] !== ' ' || cleanTextRows[i] !== '\t') {
-                        if ( cleanTextRows[i].match(checkNumRegexp) ) {
-                            textRowsResult.push(cleanTextRows[i].replace(removeNumRegexp, ""));
-                        }
-                        else {
-                            if (textRowsResult[textRowsResult.length -1] !== undefined) {
-                                textRowsResult[textRowsResult.length -1] = textRowsResult[textRowsResult.length -1] + ' <br>' + cleanTextRows[i];
-                            }
-                        }
-                    }
-                }
-                return textRowsResult;
             }
 
-            function splitTextToTable(text) {
-                let checkTableRegexp = /\t/;
-                let tableString = '';
-                if (text.match(checkTableRegexp)) { // строка подходит под таблицу
-                    let tableArr = [];
-
-                    tableArr = text.split('<br>'); // разбиваем строку по <br>
-
-
-                    console.log(tableArr)
-
-                    for (let i=0;i<tableArr.length;i++) { // перебираем полученный массив
-                        if (tableArr[i].match(checkTableRegexp)) {// если элемент массива подходит под таблицу
-
-                            let rowArr = tableArr[i].split('\t');
-                            let rowString = '';
-
-                            if (tableArr[i - 1] === undefined || !tableArr[i - 1].match(checkTableRegexp)) {  // открываем таблицу
-                                rowString = '\n<table>\n';
-                            }
-
-                            rowString = rowString + '<tr>';
-                            for (let r=0;r<rowArr.length;r++) { // формируем строку таблицы с помощью перебора
-                                rowString = rowString + `<td>${rowArr[r]}</td>`;
-                            }
-                            rowString = rowString + '</tr>\n';
-
-                            if (tableArr[i + 1] === undefined || !tableArr[i + 1].match(checkTableRegexp)) {  // закрываем таблицу
-                                rowString = rowString + '</table>\n';
-                            }
-
-                            tableString = tableString + rowString;
-                            
-
-                        } else {
-                            tableString = tableString + tableArr[i] + '<br>';
-                        }
-                    }
-                } else {
-                    tableString = text;
-                }
-                return tableString;
-            }
 
         </script>
     </body>
