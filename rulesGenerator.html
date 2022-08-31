@@ -412,10 +412,10 @@ body {
                 arrListFinish = arrListFinish.map(i => i.replace('<br><br>', '').trimStart());
                 let arrListHTML = [];
                 arrListFinish.forEach(i=> {
-                    arrListHTML.push('<li><span>' + i + '</li></span>');
+                    arrListHTML.push('<li><span>' + i + '</span></li>');
                 });
                 arrDisclaimer.forEach(i=> {
-                    arrListHTML.push('<li class="eld-disclaimer"><span>' + i + '</li>');
+                    arrListHTML.push('<li class="eld-disclaimer"><span>' + i + '</span></li>');
                 });
                 let listHTML = '';
                 arrListHTML.forEach(i=>{
